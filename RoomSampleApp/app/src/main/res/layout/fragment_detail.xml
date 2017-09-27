@@ -1,13 +1,31 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shokooh.roomsampleapp.main.view.Detail.DetailFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/i_tvDateDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cyan"
+        android:paddingBottom="20dp"
+        android:paddingTop="300dp"
+        android:paddingLeft="5dp"
+        android:text="12:53PM 18/09/2017"
+        style="@style/Text.Primary"/>
+        <!--android:transitionName="date"-->
+
+
+    <TextView
+        android:id="@+id/i_tvContentDetail"
+        style="@style/Text.Secondary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:layout_below="@+id/i_tvDateDetail"
+        android:paddingBottom="20dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:text="This is a sample note for this sample project. Main goal is to practice the MVC design pattern and RecyclerView usage."/>
+        <!--android:transitionName="content"-->
+</RelativeLayout>
