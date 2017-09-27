@@ -1,4 +1,4 @@
-package com.example.shokooh.roomsampleapp.main.view;
+package com.example.shokooh.roomsampleapp.main.view.List;
 
 import android.content.Intent;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.example.shokooh.roomsampleapp.R;
 import com.example.shokooh.roomsampleapp.main.data.FakeDataSource;
 import com.example.shokooh.roomsampleapp.main.data.ListItem;
-import com.example.shokooh.roomsampleapp.main.logic.Controller;
+import com.example.shokooh.roomsampleapp.main.viewmodel.Controller;
+import com.example.shokooh.roomsampleapp.main.view.Detail.DetailActivity;
+import com.example.shokooh.roomsampleapp.main.view.viewInterface;
 
 import java.util.List;
 

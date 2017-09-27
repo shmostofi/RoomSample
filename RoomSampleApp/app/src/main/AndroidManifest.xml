@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shokooh.roomsampleapp">
 
+    <!--
+    TODO: GENERAL plan:
+    view now has these sub-packs [based on feature/action]:
+        - list
+        - detail
+        - create
+    1 activity & 1 fragment for each
+
+    NEXT: create all, in view sub-pack - xml & java
+    -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,14 +19,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.shokooh.roomsampleapp.main.view.ListActivity">
+        <activity android:name=".main.view.List.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.shokooh.roomsampleapp.main.view.DetailActivity"></activity>
+        <activity android:name=".main.view.Detail.DetailActivity" />
+        <activity android:name=".main.view.Create.CreateActivity"></activity>
     </application>
 
 </manifest>

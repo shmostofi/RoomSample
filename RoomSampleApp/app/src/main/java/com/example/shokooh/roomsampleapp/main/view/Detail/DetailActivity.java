@@ -1,4 +1,4 @@
-package com.example.shokooh.roomsampleapp.main.view;
+package com.example.shokooh.roomsampleapp.main.view.Detail;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

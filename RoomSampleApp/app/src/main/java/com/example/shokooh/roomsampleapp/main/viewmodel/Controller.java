@@ -1,4 +1,4 @@
-package com.example.shokooh.roomsampleapp.main.logic;
+package com.example.shokooh.roomsampleapp.main.viewmodel;
 
 import android.view.View;
 
