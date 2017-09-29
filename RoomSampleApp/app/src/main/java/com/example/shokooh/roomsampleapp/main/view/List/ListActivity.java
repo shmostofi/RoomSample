@@ -25,7 +25,7 @@ import com.example.shokooh.roomsampleapp.main.view.viewInterface;
 
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity implements viewInterface, View.OnClickListener{
+public class ListActivity extends AppCompatActivity implements viewInterface{
 
     private final static String EXTRA_DATE = "EXTRA_DATE";
     private final static String EXTRA_CONTENT = "EXTRA_CONTENT";
@@ -34,24 +34,11 @@ public class ListActivity extends AppCompatActivity implements viewInterface, Vi
     private Controller ctrl ;
     private RecyclerView rv;
     private List<ListItem> dataList;
-    private CustomAdapter adp;
-    private LayoutInflater li ;
-    private FloatingActionButton fabNewItem;
     private Toolbar tbMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-        rv = (RecyclerView) findViewById(R.id.i_rvMain);
-        li = getLayoutInflater();
-        fabNewItem = (FloatingActionButton) findViewById(R.id.i_fabNewItem);
-        fabNewItem.setOnClickListener(this);
-
-
-        tbMain = (Toolbar) findViewById(R.id.i_tbMain);
-        tbMain.setTitle("List Activity");
-        ctrl = new Controller(this, new FakeDataSource());
     }
 
     @Override
@@ -96,51 +83,6 @@ public class ListActivity extends AppCompatActivity implements viewInterface, Vi
         adp.notifyItemRemoved(position);
     }
 
-    private class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>
-    {
-        class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-        {
-            private TextView tvDate;
-            private TextView tvContent;
-            private ImageView ivLogo;
-            private ViewGroup container;
-
-            @Override
-            public void onClick(View v) {
-                ListItem clickedItem = dataList.get(getAdapterPosition());
-                ctrl.onListItemClick(clickedItem, v);
-            }
-
-            public CustomViewHolder(View itemView) {
-                super(itemView);
-                tvDate = (TextView) itemView.findViewById(R.id.i_tvDate);
-                tvContent = (TextView) itemView.findViewById(R.id.i_tvContent);
-                ivLogo = (ImageView) itemView.findViewById(R.id.i_ivLogo);
-                container = (ViewGroup) itemView.findViewById(R.id.i_layoutListItem);
-
-                container.setOnClickListener(this);
-            }
-        }
-
-        @Override
-        public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = li.inflate(R.layout.item_data, parent, false);
-            return new CustomViewHolder(v);
-        }
-
-        @Override
-        public void onBindViewHolder(CustomViewHolder holder, int position) {
-            ListItem currentItem = dataList.get(position);
-            holder.tvDate.setText(currentItem.getDate());
-            holder.tvContent.setText(currentItem.getContent());
-            holder.ivLogo.setImageResource(currentItem.getColor());
-        }
-
-        @Override
-        public int getItemCount() {
-            return dataList.size();
-        }
-    }
 
     private ItemTouchHelper.Callback createHelperCallback() {
         /*First Param is for Up/Down motion, second is for Left/Right.
@@ -170,12 +112,6 @@ public class ListActivity extends AppCompatActivity implements viewInterface, Vi
         };
 
         return simpleItemTouchCallback;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.i_fabNewItem)
-            ctrl.onAddNewClicked(v);
     }
 
     @Override
