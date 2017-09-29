@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shokooh.roomsampleapp.main.view.Create.CreateActivity">
+    tools:context="com.example.shokooh.roomsampleapp.main.view.Create.CreateActivity"
+    android:id="@+id/i_containerCreate">
 
 </android.support.constraint.ConstraintLayout>
