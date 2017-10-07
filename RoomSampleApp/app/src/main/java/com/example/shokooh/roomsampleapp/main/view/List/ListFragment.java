@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,10 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shokooh.roomsampleapp.R;
-import com.example.shokooh.roomsampleapp.main.data.FakeDataSource;
 import com.example.shokooh.roomsampleapp.main.data.ListItem;
 import com.example.shokooh.roomsampleapp.main.view.Detail.DetailActivity;
-import com.example.shokooh.roomsampleapp.main.viewmodel.Controller;
 
 import java.util.List;
 
@@ -61,7 +58,7 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
 
         tbMain = (Toolbar) v.findViewById(R.id.i_tbMain);
         tbMain.setTitle("List Activity");
-//        ctrl = new Controller(this, new FakeDataSource());// TODO: 2017-09-28 add proper replace
+//        ctrl = new Controller(this, new ListItemRepository());// TODO: 2017-09-28 add proper replace
 
         return v;
     }

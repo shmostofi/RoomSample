@@ -1,12 +1,18 @@
 package com.example.shokooh.roomsampleapp.main.data;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 /**
  * Created by smostofi on 18/09/2017.
  */
 
+@Entity
 public class ListItem {
-    private int color;
+
+    @PrimaryKey
     private String date;
+    private int color;
     private String content;
 
     public ListItem(int color, String date, String content) {

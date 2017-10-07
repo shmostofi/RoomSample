@@ -3,7 +3,7 @@ package com.example.shokooh.roomsampleapp.main.viewmodel;
 import android.view.View;
 
 import com.example.shokooh.roomsampleapp.main.data.ListItem;
-import com.example.shokooh.roomsampleapp.main.data.dataInterface;
+import com.example.shokooh.roomsampleapp.main.data.ListItemDao;
 import com.example.shokooh.roomsampleapp.main.view.viewInterface;
 
 /**
@@ -13,11 +13,11 @@ import com.example.shokooh.roomsampleapp.main.view.viewInterface;
 public class Controller {
 
     private viewInterface vi;
-    private dataInterface di;
+    private ListItemDao di;
     private ListItem lastDeletedItem;
     private int lastDeletedPosition;
 
-    public Controller(viewInterface view, dataInterface data) {
+    public Controller(viewInterface view, ListItemDao data) {
         vi = view ;
         di = data ;
         setData();
