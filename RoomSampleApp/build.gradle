@@ -35,3 +35,4 @@ ext {
     viewPagerIndicatorVersion = '2.4.1'
     daggerVersion = '2.11'
 }
+

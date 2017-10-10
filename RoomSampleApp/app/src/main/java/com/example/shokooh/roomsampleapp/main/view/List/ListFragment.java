@@ -118,47 +118,47 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
         }
     }
 
-    @Override
-    public void startDetailActivity(String content, String date, int colorResource, View v) {
-        Intent i = new Intent(this, DetailActivity.class);
-        i.putExtra(EXTRA_CONTENT, content);
-        i.putExtra(EXTRA_DATE, date);
-        i.putExtra(EXTRA_COLOR, colorResource);
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getWindow().setEnterTransition(new Fade(Fade.IN));
-//            getWindow().setEnterTransition(new Fade(Fade.OUT));
+//    @Override
+//    public void startDetailActivity(String content, String date, int colorResource, View v) {
+//        Intent i = new Intent(this, DetailActivity.class);
+//        i.putExtra(EXTRA_CONTENT, content);
+//        i.putExtra(EXTRA_DATE, date);
+//        i.putExtra(EXTRA_COLOR, colorResource);
 //
-//            ActivityOptions options = ActivityOptions
-//                    .makeSceneTransitionAnimation(this,
-//                            new Pair<View, String>(v.findViewById(R.id.i_tvContent),"content"),
-//                            new Pair<View, String>(v.findViewById(R.id.i_tvDate),"date"));
-//
-//            startActivity(i, options.toBundle());
-//
-//
-//        }
-//        else {
-        startActivity(i);
-//        }
-    }
+////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+////            getWindow().setEnterTransition(new Fade(Fade.IN));
+////            getWindow().setEnterTransition(new Fade(Fade.OUT));
+////
+////            ActivityOptions options = ActivityOptions
+////                    .makeSceneTransitionAnimation(this,
+////                            new Pair<View, String>(v.findViewById(R.id.i_tvContent),"content"),
+////                            new Pair<View, String>(v.findViewById(R.id.i_tvDate),"date"));
+////
+////            startActivity(i, options.toBundle());
+////
+////
+////        }
+////        else {
+//        startActivity(i);
+////        }
+//    }
 
     public void setDataList(List<ListItem> dataIn) {
-        dataList = dataIn ;
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        rv.setLayoutManager(llm);
-        adp = new CustomAdapter();
-        rv.setAdapter(adp);
-
-        ItemTouchHelper ith = new ItemTouchHelper(createHelperCallback());
-        ith.attachToRecyclerView(rv);
+//        dataList = dataIn ;
+//        LinearLayoutManager llm = new LinearLayoutManager(this);
+//        rv.setLayoutManager(llm);
+//        adp = new CustomAdapter();
+//        rv.setAdapter(adp);
+//
+//        ItemTouchHelper ith = new ItemTouchHelper(createHelperCallback());
+//        ith.attachToRecyclerView(rv);
     }
 
-    @Override
-    public void deleteListItem(int position) {
-        dataList.remove(position);
-        adp.notifyItemRemoved(position);
-    }
+//    @Override
+//    public void deleteListItem(int position) {
+//        dataList.remove(position);
+//        adp.notifyItemRemoved(position);
+//    }
 
     private ItemTouchHelper.Callback createHelperCallback() {
         /*First Param is for Up/Down motion, second is for Left/Right.
@@ -180,50 +180,52 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
-                ctrl.onListItemSwiped(
-                        position,
-                        dataList.get(position)
-                );
+//                ctrl.onListItemSwiped(
+//                        position,
+//                        dataList.get(position)
+//                );
             }
         };
 
         return simpleItemTouchCallback;
     }
 
-    @Override
-    public void addNewItem(ListItem li) {
-        dataList.add(li);
-        adp.notifyItemInserted(adp.getItemCount());
-        rv.smoothScrollToPosition(adp.getItemCount());
+//    @Override
+//    public void addNewItem(ListItem li) {
+//        dataList.add(li);
+//        adp.notifyItemInserted(adp.getItemCount());
+//        rv.smoothScrollToPosition(adp.getItemCount());
+//
+//    }
 
-    }
 
-
-    @Override
-    public void showUndoSnackbar() {
-        Snackbar.make(findViewById(R.id.i_layoutListItem),
-                "Item Deleted",
-                Snackbar.LENGTH_LONG).
-                setAction("UNDO?", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ctrl.onUndoConfirmed();
-                    }
-                })
-                .addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                    @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-
-                        ctrl.onSnackbarTimeout();
-                    }
-                }).show();
-    }
-
-    @Override
-    public void insertListItem(ListItem li, int position) {
-        dataList.add(position, li);
-        adp.notifyItemInserted(position);
-        if(position==adp.getItemCount()-1)
-            rv.smoothScrollToPosition(adp.getItemCount());  // does not work as expected
-    }}
+//    @Override
+//    public void showUndoSnackbar() {
+//        Snackbar.make(findViewById(R.id.i_layoutListItem),
+//                "Item Deleted",
+//                Snackbar.LENGTH_LONG).
+//                setAction("UNDO?", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        ctrl.onUndoConfirmed();
+//                    }
+//                })
+//                .addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+//                    @Override
+//                    public void onDismissed(Snackbar transientBottomBar, int event) {
+//                        super.onDismissed(transientBottomBar, event);
+//
+//                        ctrl.onSnackbarTimeout();
+//                    }
+//                }).show();
+//    }
+//
+//    @Override
+//    public void insertListItem(ListItem li, int position) {
+//        dataList.add(position, li);
+//        adp.notifyItemInserted(position);
+//        if(position==adp.getItemCount()-1)
+//            rv.smoothScrollToPosition(adp.getItemCount());  // does not work as expected
+//    }
+//
+ }

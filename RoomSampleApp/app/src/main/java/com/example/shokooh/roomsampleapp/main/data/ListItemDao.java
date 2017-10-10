@@ -20,7 +20,7 @@ public interface ListItemDao {
     LiveData<List<ListItem>> getData();
 
     @Query("SELECT * FROM ListItem WHERE date = :Id")
-    LiveData<ListItem> getItemById(String Id);
+    LiveData<ListItem> getListItemById(String Id);
 
     @Delete
     void deleteListItem(ListItem li);

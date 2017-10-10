@@ -2,11 +2,7 @@ package com.example.shokooh.roomsampleapp.main.data;
 
 import android.arch.lifecycle.LiveData;
 
-import com.example.shokooh.roomsampleapp.R;
-
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -20,22 +16,26 @@ public class ListItemRepository {
 
     @Inject
     public ListItemRepository(ListItemDao lid_in) {
-       lid = lid_in;
+
+        lid = lid_in;
     }
 
-    public LiveData<List<ListItem>> getItems() {
+    public LiveData<List<ListItem>> getListItems() {
         return lid.getData();
     }
 
-    public LiveData<ListItem> getItemById(String Id) {
-        return lid.getItemById(Id);
+    public LiveData<ListItem> getListItemById(String Id) {
+
+        return lid.getListItemById(Id);
     }
 
     public void deleteListItem(ListItem li) {
+
         lid.deleteListItem(li);
     }
 
     public void insertListItem(ListItem li) {
+
         lid.insertListItem(li);
     }
 }
