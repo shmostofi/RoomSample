@@ -15,7 +15,7 @@ public class RoomSampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        ac = DaggerApplicationCom
+//        ac = DaggerApplicationComponent
     }
 
     public ApplicationComponent getApplicationComponent(){
