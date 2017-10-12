@@ -2,6 +2,7 @@ package com.example.shokooh.roomsampleapp.main.view.List;
 
 
 import android.arch.lifecycle.LifecycleFragment;
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,12 +20,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shokooh.roomsampleapp.R;
+import com.example.shokooh.roomsampleapp.main.RoomSampleApplication;
 import com.example.shokooh.roomsampleapp.main.data.ListItem;
 import com.example.shokooh.roomsampleapp.main.view.Detail.DetailActivity;
+import com.example.shokooh.roomsampleapp.main.viewmodel.ListItemCollectionViewModel;
+import com.example.shokooh.roomsampleapp.main.viewmodel.ListItemViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class ListFragment extends LifecycleFragment implements View.OnClickListener{
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
+    ListItemCollectionViewModel licvm;
 
     private final static String EXTRA_DATE = "EXTRA_DATE";
     private final static String EXTRA_CONTENT = "EXTRA_CONTENT";
@@ -43,7 +54,7 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ((RoomSampleApplication)getActivity().getApplication()).getApplicationComponent().inject(this);
     }
 
     @Override
@@ -54,12 +65,8 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
         li = getActivity().getLayoutInflater();
         fabNewItem = (FloatingActionButton) v.findViewById(R.id.i_fabNewItem);
         fabNewItem.setOnClickListener(this);
-
-
         tbMain = (Toolbar) v.findViewById(R.id.i_tbMain);
         tbMain.setTitle("List Activity");
-//        ctrl = new Controller(this, new ListItemRepository());// TODO: 2017-09-28 add proper replace
-
         return v;
     }
 
