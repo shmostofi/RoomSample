@@ -1,5 +1,6 @@
 package com.example.shokooh.roomsampleapp.main.dependencyinjection;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 
 import com.example.shokooh.roomsampleapp.main.RoomSampleApplication;
@@ -49,7 +50,7 @@ public class RoomModule {
 
     @Singleton
     @Provides
-    CustomViewModelFactory provideViewModelFactory(ListItemRepository lir)
+    ViewModelProvider.Factory provideViewModelFactory(ListItemRepository lir)
     {
         return new CustomViewModelFactory(lir);
     }
