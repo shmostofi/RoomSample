@@ -1,7 +1,9 @@
 package com.example.shokooh.roomsampleapp.main.viewmodel;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.example.shokooh.roomsampleapp.main.data.ListItem;
 import com.example.shokooh.roomsampleapp.main.data.ListItemRepository;
 
 /**
@@ -13,5 +15,10 @@ public class ListItemViewModel extends ViewModel {
 
     public ListItemViewModel(ListItemRepository lir) {
         this.lir = lir;
+    }
+
+    public LiveData<ListItem> getListItem(String ID)
+    {
+        return lir.getListItemById(ID);
     }
 }

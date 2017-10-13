@@ -33,11 +33,11 @@ import javax.inject.Inject;
 public class ListFragment extends LifecycleFragment {
 
     @Inject
-    ViewModelProvider.Factory vmf;
+    ViewModelProvider.Factory vmpf;
 
     ListItemCollectionViewModel licvm;
 
-    private final static String EXTRA_DATE = "EXTRA_DATE";
+    private final static String EXTRA_DATE_ID = "EXTRA_DATE_ID";
 
     private RecyclerView rv;
     private List<ListItem> dataList;
@@ -76,7 +76,7 @@ public class ListFragment extends LifecycleFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        licvm = ViewModelProviders.of(this, vmf).get(ListItemCollectionViewModel.class);
+        licvm = ViewModelProviders.of(this, vmpf).get(ListItemCollectionViewModel.class);
         licvm.getListOfItems().observe(this, new Observer<List<ListItem>>() {
             @Override
             public void onChanged(@Nullable List<ListItem> listItems) {
@@ -134,7 +134,7 @@ public class ListFragment extends LifecycleFragment {
 
     public void startDetailActivity(String dateID, View v) {
         Intent i = new Intent(getActivity(), DetailActivity.class);
-        i.putExtra(EXTRA_DATE, dateID);
+        i.putExtra(EXTRA_DATE_ID, dateID);
 
 //
 ////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
