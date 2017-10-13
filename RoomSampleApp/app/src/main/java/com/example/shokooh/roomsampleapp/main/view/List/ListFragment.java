@@ -2,13 +2,13 @@ package com.example.shokooh.roomsampleapp.main.view.List;
 
 
 import android.arch.lifecycle.LifecycleFragment;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,24 +22,22 @@ import android.widget.TextView;
 import com.example.shokooh.roomsampleapp.R;
 import com.example.shokooh.roomsampleapp.main.RoomSampleApplication;
 import com.example.shokooh.roomsampleapp.main.data.ListItem;
+import com.example.shokooh.roomsampleapp.main.view.Create.CreateActivity;
 import com.example.shokooh.roomsampleapp.main.view.Detail.DetailActivity;
 import com.example.shokooh.roomsampleapp.main.viewmodel.ListItemCollectionViewModel;
-import com.example.shokooh.roomsampleapp.main.viewmodel.ListItemViewModel;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class ListFragment extends LifecycleFragment implements View.OnClickListener{
+public class ListFragment extends LifecycleFragment {
 
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    ViewModelProvider.Factory vmf;
 
     ListItemCollectionViewModel licvm;
 
     private final static String EXTRA_DATE = "EXTRA_DATE";
-    private final static String EXTRA_CONTENT = "EXTRA_CONTENT";
-    private final static String EXTRA_COLOR = "EXTRA_COLOR";
 
     private RecyclerView rv;
     private List<ListItem> dataList;
@@ -64,13 +62,29 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
         rv = (RecyclerView) v.findViewById(R.id.i_rvMain);
         li = getActivity().getLayoutInflater();
         fabNewItem = (FloatingActionButton) v.findViewById(R.id.i_fabNewItem);
-        fabNewItem.setOnClickListener(this);
+        fabNewItem.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startCreateActivity();
+            }
+        });
         tbMain = (Toolbar) v.findViewById(R.id.i_tbMain);
         tbMain.setTitle("List Activity");
         return v;
     }
 
-    // TODO: 2017-09-28  main tasks here: 0- deploy the recyclerView, Adaptor and ViewHolder 1- get click event on fab, run CreateAct 2- get click event on VH, run the DetailAct 3- swipe for deletion
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        licvm = ViewModelProviders.of(this, vmf).get(ListItemCollectionViewModel.class);
+        licvm.getListOfItems().observe(this, new Observer<List<ListItem>>() {
+            @Override
+            public void onChanged(@Nullable List<ListItem> listItems) {
+                if (dataList==null)
+                    setDataList(listItems);
+            }
+        });
+    }
 
     private class CustomAdapter extends RecyclerView.Adapter<ListFragment.CustomAdapter.CustomViewHolder>
     {
@@ -84,7 +98,7 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 ListItem clickedItem = dataList.get(getAdapterPosition());
-//                ctrl.onListItemClick(clickedItem, v); // TODO: 2017-09-28 add proper replace
+                startDetailActivity(clickedItem.getDate(), v);
             }
 
             public CustomViewHolder(View itemView) {
@@ -118,19 +132,10 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.i_fabNewItem)
-        {//            ctrl.onAddNewClicked(v);// TODO: 2017-09-28 add proper replace
-        }
-    }
+    public void startDetailActivity(String dateID, View v) {
+        Intent i = new Intent(getActivity(), DetailActivity.class);
+        i.putExtra(EXTRA_DATE, dateID);
 
-//    @Override
-//    public void startDetailActivity(String content, String date, int colorResource, View v) {
-//        Intent i = new Intent(this, DetailActivity.class);
-//        i.putExtra(EXTRA_CONTENT, content);
-//        i.putExtra(EXTRA_DATE, date);
-//        i.putExtra(EXTRA_COLOR, colorResource);
 //
 ////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 ////            getWindow().setEnterTransition(new Fade(Fade.IN));
@@ -146,26 +151,20 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
 ////
 ////        }
 ////        else {
-//        startActivity(i);
+        startActivity(i);
 ////        }
-//    }
-
-    public void setDataList(List<ListItem> dataIn) {
-//        dataList = dataIn ;
-//        LinearLayoutManager llm = new LinearLayoutManager(this);
-//        rv.setLayoutManager(llm);
-//        adp = new CustomAdapter();
-//        rv.setAdapter(adp);
-//
-//        ItemTouchHelper ith = new ItemTouchHelper(createHelperCallback());
-//        ith.attachToRecyclerView(rv);
     }
 
-//    @Override
-//    public void deleteListItem(int position) {
-//        dataList.remove(position);
-//        adp.notifyItemRemoved(position);
-//    }
+    public void setDataList(List<ListItem> dataIn) {
+        dataList = dataIn ;
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(llm);
+        adp = new CustomAdapter();
+        rv.setAdapter(adp);
+
+        ItemTouchHelper ith = new ItemTouchHelper(createHelperCallback());
+        ith.attachToRecyclerView(rv);
+    }
 
     private ItemTouchHelper.Callback createHelperCallback() {
         /*First Param is for Up/Down motion, second is for Left/Right.
@@ -187,23 +186,19 @@ public class ListFragment extends LifecycleFragment implements View.OnClickListe
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
-//                ctrl.onListItemSwiped(
-//                        position,
-//                        dataList.get(position)
-//                );
+                licvm.deleteListItem(dataList.get(position));
+                dataList.remove(position);
+                adp.notifyItemRemoved(position);
             }
         };
 
         return simpleItemTouchCallback;
     }
 
-//    @Override
-//    public void addNewItem(ListItem li) {
-//        dataList.add(li);
-//        adp.notifyItemInserted(adp.getItemCount());
-//        rv.smoothScrollToPosition(adp.getItemCount());
-//
-//    }
+    public void startCreateActivity() {
+        Intent i = new Intent(getActivity(), CreateActivity.class);
+        startActivity(i);
+    }
 
 
 //    @Override
