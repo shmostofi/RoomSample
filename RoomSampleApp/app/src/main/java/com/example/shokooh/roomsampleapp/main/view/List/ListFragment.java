@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shokooh.roomsampleapp.R;
 import com.example.shokooh.roomsampleapp.main.RoomSampleApplication;
@@ -70,6 +71,8 @@ public class ListFragment extends LifecycleFragment {
         });
         tbMain = (Toolbar) v.findViewById(R.id.i_tbMain);
         tbMain.setTitle("List Activity");
+
+        Toast.makeText(getActivity(), "list fragment 'onCreateView' done!", Toast.LENGTH_LONG).show();
         return v;
     }
 
@@ -84,6 +87,8 @@ public class ListFragment extends LifecycleFragment {
                     setDataList(listItems);
             }
         });
+        Toast.makeText(getActivity(), "list fragment 'onActivityCreated' done!", Toast.LENGTH_LONG).show();
+
     }
 
     private class CustomAdapter extends RecyclerView.Adapter<ListFragment.CustomAdapter.CustomViewHolder>

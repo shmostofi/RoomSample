@@ -2,6 +2,7 @@ package com.example.shokooh.roomsampleapp.main.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.example.shokooh.roomsampleapp.main.data.ListItem;
 import com.example.shokooh.roomsampleapp.main.data.ListItemRepository;
 
 /**
@@ -13,5 +14,10 @@ public class NewListItemViewModel extends ViewModel {
 
     public NewListItemViewModel(ListItemRepository lir) {
         this.lir = lir;
+    }
+
+    public void AddNewItemToRepo(ListItem li)
+    {
+        lir.insertListItem(li);
     }
 }

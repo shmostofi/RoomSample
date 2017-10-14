@@ -2,21 +2,34 @@ package com.example.shokooh.roomsampleapp.main.view.Create;
 
 import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.shokooh.roomsampleapp.R;
 import com.example.shokooh.roomsampleapp.main.RoomSampleApplication;
+import com.example.shokooh.roomsampleapp.main.data.ListItem;
+import com.example.shokooh.roomsampleapp.main.view.List.ListActivity;
 import com.example.shokooh.roomsampleapp.main.viewmodel.NewListItemViewModel;
 
 import javax.inject.Inject;
 
+/*
+there should be save button - onClick : pass the created ListItem object into nlivm, it will take care of creating a new entry in repo then in db
+there should be discard button - onClick : launch listAct
+what to put in Observe
+ */
 public class CreateFragment extends LifecycleFragment {
 
     @Inject
@@ -24,7 +37,10 @@ public class CreateFragment extends LifecycleFragment {
 
     private NewListItemViewModel nlivm ;
 
-    // TODO: 13/10/2017 add the widget references
+    private TextView tvDateCreate;
+    private EditText etContentCreate;
+    private Button btnSave;
+    private Button btnDiscard;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +51,7 @@ public class CreateFragment extends LifecycleFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // TODO: 13/10/2017 set up the viewModel connection 
+        nlivm = ViewModelProviders.of(this, vmpf).get(NewListItemViewModel.class);
     }
 
     @Override
@@ -44,8 +60,31 @@ public class CreateFragment extends LifecycleFragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
-        // TODO: 13/10/2017 fill in widget references
+        tvDateCreate = (TextView) v.findViewById(R.id.i_tvDateCreate);
+        etContentCreate = (EditText) v.findViewById(R.id.i_etContentCreate);
+        btnDiscard = (Button) v.findViewById(R.id.i_btnDiscard);
+        btnSave = (Button) v.findViewById(R.id.i_btnSave);
 
+        btnDiscard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startListActivity();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newContent = etContentCreate.getText().toString();
+                if ( !newContent.isEmpty() )
+                {
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+
+                    ListItem newLisItem = new ListItem(R.color.colorAccent, sdf.format(new Date()), newContent);
+                    nlivm.AddNewItemToRepo(newLisItem);
+                }
+            }
+        });
         return v;
     }
 
@@ -58,5 +97,11 @@ public class CreateFragment extends LifecycleFragment {
     public void onDetach() {
         super.onDetach();
     }
+
+    public void startListActivity()
+    {
+        startActivity(new Intent(getActivity(), ListActivity.class));
+    }
+
 
 }

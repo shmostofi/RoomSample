@@ -5,10 +5,8 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +16,6 @@ import com.example.shokooh.roomsampleapp.R;
 import com.example.shokooh.roomsampleapp.main.RoomSampleApplication;
 import com.example.shokooh.roomsampleapp.main.data.ListItem;
 import com.example.shokooh.roomsampleapp.main.viewmodel.ListItemViewModel;
-
-import java.nio.BufferUnderflowException;
 
 import javax.inject.Inject;
 
@@ -78,7 +74,7 @@ public class DetailFragment extends LifecycleFragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         tvContentDetail = (TextView) v.findViewById(R.id.i_tvContentDetail);
-        tvDateDetail = (TextView) v.findViewById(R.id.i_tvDateDetail);
+        tvDateDetail = (TextView) v.findViewById(R.id.i_tvDateCreate);
 
         return v;
     }
