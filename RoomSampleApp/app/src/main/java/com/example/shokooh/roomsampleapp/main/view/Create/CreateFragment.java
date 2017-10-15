@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.shokooh.roomsampleapp.R;
@@ -39,8 +40,8 @@ public class CreateFragment extends LifecycleFragment {
 
     private TextView tvDateCreate;
     private EditText etContentCreate;
-    private Button btnSave;
-    private Button btnDiscard;
+    private ImageButton btnSave;
+    private ImageButton btnDiscard;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,13 @@ public class CreateFragment extends LifecycleFragment {
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
         tvDateCreate = (TextView) v.findViewById(R.id.i_tvDateCreate);
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd/MM/yyyy");
         final String currentDate = sdf.format(new Date());
         tvDateCreate.setText(currentDate);
 
         etContentCreate = (EditText) v.findViewById(R.id.i_etContentCreate);
-        btnDiscard = (Button) v.findViewById(R.id.i_btnDiscard);
-        btnSave = (Button) v.findViewById(R.id.i_btnSave);
+        btnDiscard = (ImageButton) v.findViewById(R.id.i_btnDiscard);         // TODO: 2017-10-15 while typing icons shift up!
+        btnSave = (ImageButton) v.findViewById(R.id.i_btnSave);
 
         btnDiscard.setOnClickListener(new View.OnClickListener() {
             @Override
