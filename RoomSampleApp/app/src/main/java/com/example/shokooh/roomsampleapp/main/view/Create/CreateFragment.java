@@ -61,6 +61,10 @@ public class CreateFragment extends LifecycleFragment {
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
         tvDateCreate = (TextView) v.findViewById(R.id.i_tvDateCreate);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        final String currentDate = sdf.format(new Date());
+        tvDateCreate.setText(currentDate);
+
         etContentCreate = (EditText) v.findViewById(R.id.i_etContentCreate);
         btnDiscard = (Button) v.findViewById(R.id.i_btnDiscard);
         btnSave = (Button) v.findViewById(R.id.i_btnSave);
@@ -78,10 +82,9 @@ public class CreateFragment extends LifecycleFragment {
                 String newContent = etContentCreate.getText().toString();
                 if ( !newContent.isEmpty() )
                 {
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-
-                    ListItem newLisItem = new ListItem(R.color.colorAccent, sdf.format(new Date()), newContent);
+                    ListItem newLisItem = new ListItem(R.color.colorAccent, currentDate, newContent);
                     nlivm.AddNewItemToRepo(newLisItem);
+                    startListActivity();
                 }
             }
         });

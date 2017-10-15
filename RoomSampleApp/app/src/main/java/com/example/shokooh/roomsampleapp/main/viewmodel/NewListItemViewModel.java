@@ -1,6 +1,7 @@
 package com.example.shokooh.roomsampleapp.main.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
+import android.os.AsyncTask;
 
 import com.example.shokooh.roomsampleapp.main.data.ListItem;
 import com.example.shokooh.roomsampleapp.main.data.ListItemRepository;
@@ -16,8 +17,16 @@ public class NewListItemViewModel extends ViewModel {
         this.lir = lir;
     }
 
+    private class AddItemTask extends AsyncTask<ListItem,Void,Void>
+    {
+        @Override
+        protected Void doInBackground(ListItem... params) {
+            lir.insertListItem(params[0]);
+            return null;
+        }
+    }
     public void AddNewItemToRepo(ListItem li)
     {
-        lir.insertListItem(li);
+        new AddItemTask().execute(li);
     }
 }

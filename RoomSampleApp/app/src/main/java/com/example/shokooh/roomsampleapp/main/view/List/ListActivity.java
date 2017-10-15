@@ -13,8 +13,6 @@ public class ListActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(this, "list activity 'onCreate'!", Toast.LENGTH_LONG).show();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
