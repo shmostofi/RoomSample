@@ -67,7 +67,7 @@ public class CreateFragment extends LifecycleFragment {
         tvDateCreate.setText(currentDate);
 
         etContentCreate = (EditText) v.findViewById(R.id.i_etContentCreate);
-        btnDiscard = (ImageButton) v.findViewById(R.id.i_btnDiscard);         // TODO: 2017-10-15 while typing icons shift up!
+        btnDiscard = (ImageButton) v.findViewById(R.id.i_btnDiscard);
         btnSave = (ImageButton) v.findViewById(R.id.i_btnSave);
 
         btnDiscard.setOnClickListener(new View.OnClickListener() {

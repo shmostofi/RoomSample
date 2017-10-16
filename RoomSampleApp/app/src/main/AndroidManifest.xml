@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.view.Detail.DetailActivity" />
-        <activity android:name=".main.view.Create.CreateActivity"></activity>
+        <activity android:name=".main.view.Create.CreateActivity" />
+
     </application>
 
 </manifest>
