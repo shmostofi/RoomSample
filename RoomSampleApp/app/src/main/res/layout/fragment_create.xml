@@ -9,25 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"/>
 
-    <com.viewpagerindicator.CirclePageIndicator
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_below="@+id/i_vpColor"/>
+    <!--<com.viewpagerindicator.CirclePageIndicator-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:layout_below="@+id/i_vpColor"/>-->
 
-
-    <TextView
-        android:id="@+id/i_tvDateCreate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cyan"
-        android:paddingBottom="20dp"
-        android:paddingTop="50dp"
-        android:paddingLeft="5dp"
-        android:text=""
-        style="@style/Text.Primary"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/i_btnSave"
@@ -59,7 +45,7 @@
     <ScrollView android:id="@+id/MainForm"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@+id/i_tvDateCreate"
+        android:layout_below="@+id/i_vpColor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <EditText

@@ -7,10 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +37,12 @@ public class CreateFragment extends LifecycleFragment {
 
     private NewListItemViewModel nlivm ;
 
-    private TextView tvDateCreate;
     private EditText etContentCreate;
     private ImageButton btnSave;
     private ImageButton btnDiscard;
+    private ViewPager vpColor;
+
+    private PagerAdapter pa;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,14 +61,18 @@ public class CreateFragment extends LifecycleFragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
-        tvDateCreate = (TextView) v.findViewById(R.id.i_tvDateCreate);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd/MM/yyyy");
         final String currentDate = sdf.format(new Date());
 
         etContentCreate = (EditText) v.findViewById(R.id.i_etContentCreate);
         btnDiscard = (ImageButton) v.findViewById(R.id.i_btnDiscard);
         btnSave = (ImageButton) v.findViewById(R.id.i_btnSave);
+        vpColor = (ViewPager) v.findViewById(R.id.i_vpColor);
 
+        pa = new ColorPagerAdaptor();
+        vpColor.setAdapter(pa);
+
+//        pa.getItemPosition()
         btnDiscard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +86,9 @@ public class CreateFragment extends LifecycleFragment {
                 String newContent = etContentCreate.getText().toString();
                 if ( !newContent.isEmpty() )
                 {
-                    ListItem newLisItem = new ListItem(R.color.colorAccent, currentDate, newContent);
+                    ListItem newLisItem = new ListItem(
+                            ((ColorDrawable)vpColor.getFocusedChild().getBackground()).getColor(),
+                            currentDate, newContent);
                     nlivm.AddNewItemToRepo(newLisItem);
                     startListActivity();
                 }
@@ -100,7 +111,6 @@ public class CreateFragment extends LifecycleFragment {
     {
         startActivity(new Intent(getActivity(), ListActivity.class));
     }
-
 
     private class ColorPagerAdaptor extends PagerAdapter {
 
