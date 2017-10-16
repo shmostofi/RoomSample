@@ -10,12 +10,13 @@ import java.util.Date;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shokooh.roomsampleapp.R;
@@ -26,11 +27,6 @@ import com.example.shokooh.roomsampleapp.main.viewmodel.NewListItemViewModel;
 
 import javax.inject.Inject;
 
-/*
-there should be save button - onClick : pass the created ListItem object into nlivm, it will take care of creating a new entry in repo then in db
-there should be discard button - onClick : launch listAct
-what to put in Observe
- */
 public class CreateFragment extends LifecycleFragment {
 
     @Inject
@@ -58,13 +54,11 @@ public class CreateFragment extends LifecycleFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
         tvDateCreate = (TextView) v.findViewById(R.id.i_tvDateCreate);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd/MM/yyyy");
         final String currentDate = sdf.format(new Date());
-        tvDateCreate.setText(currentDate);
 
         etContentCreate = (EditText) v.findViewById(R.id.i_etContentCreate);
         btnDiscard = (ImageButton) v.findViewById(R.id.i_btnDiscard);
@@ -108,4 +102,40 @@ public class CreateFragment extends LifecycleFragment {
     }
 
 
+    private class ColorPagerAdaptor extends PagerAdapter {
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            LayoutInflater li = LayoutInflater.from(getActivity());
+            ImageView iv = (ImageView) li.inflate(R.layout.item_pager, container, false);
+
+            switch (position) {
+                case 0:
+                    iv.setImageResource(R.drawable.blue_drawable);
+                case 1:
+                    iv.setImageResource(R.drawable.red_drawable);
+                case 2:
+                    iv.setImageResource(R.drawable.green_drawable);
+                case 3:
+                    iv.setImageResource(R.drawable.yellow_drawable);
+            }
+            container.addView(iv);
+            return iv ;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view==object;
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+    }
 }
