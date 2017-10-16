@@ -72,7 +72,6 @@ public class CreateFragment extends LifecycleFragment {
         pa = new ColorPagerAdaptor();
         vpColor.setAdapter(pa);
 
-//        pa.getItemPosition()
         btnDiscard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +79,7 @@ public class CreateFragment extends LifecycleFragment {
             }
         });
 
+        // TODO: 16/10/2017 RESOLVE : 1-viewPager shows no update 2-non new item created to list!
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,8 +87,10 @@ public class CreateFragment extends LifecycleFragment {
                 if ( !newContent.isEmpty() )
                 {
                     ListItem newLisItem = new ListItem(
-                            ((ColorDrawable)vpColor.getFocusedChild().getBackground()).getColor(),
-                            currentDate, newContent);
+//                            ((ColorDrawable)vpColor.getFocusedChild().getBackground()).getColor(),        // TODO: 16/10/2017 does not work
+                            getDrawableResource(vpColor.getCurrentItem()),
+                                    currentDate, newContent);
+
                     nlivm.AddNewItemToRepo(newLisItem);
                     startListActivity();
                 }
@@ -97,6 +99,20 @@ public class CreateFragment extends LifecycleFragment {
         return v;
     }
 
+    public int getDrawableResource (int pagerItemPosition){
+        switch (pagerItemPosition){
+            case 0:
+                return R.drawable.red_drawable;
+            case 1:
+                return R.drawable.blue_drawable;
+            case 2:
+                return R.drawable.green_drawable;
+            case 3:
+                return R.drawable.yellow_drawable;
+            default:
+                return 0;
+        }
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
