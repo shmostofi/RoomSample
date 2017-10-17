@@ -11,6 +11,7 @@ import java.util.List;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -61,7 +62,7 @@ public class CreateFragment extends LifecycleFragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a dd/MM/yyyy");
         final String currentDate = sdf.format(new Date());
 
         etContentCreate = (EditText) v.findViewById(R.id.i_etContentCreate);
@@ -79,17 +80,14 @@ public class CreateFragment extends LifecycleFragment {
             }
         });
 
-        // TODO: 16/10/2017 RESOLVE : 1-viewPager shows no update 2-non new item created to list!
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String newContent = etContentCreate.getText().toString();
                 if ( !newContent.isEmpty() )
                 {
-                    ListItem newLisItem = new ListItem(
-//                            ((ColorDrawable)vpColor.getFocusedChild().getBackground()).getColor(),        // TODO: 16/10/2017 does not work
-                            getDrawableResource(vpColor.getCurrentItem()),
-                                    currentDate, newContent);
+                    ListItem newLisItem = new ListItem(getDrawableResource(vpColor.getCurrentItem()),
+                            currentDate, newContent);
 
                     nlivm.AddNewItemToRepo(newLisItem);
                     startListActivity();
@@ -113,6 +111,7 @@ public class CreateFragment extends LifecycleFragment {
                 return 0;
         }
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -129,6 +128,24 @@ public class CreateFragment extends LifecycleFragment {
     }
 
     private class ColorPagerAdaptor extends PagerAdapter {
+
+        @Override
+        public void startUpdate(ViewGroup container) {
+            super.startUpdate(container);
+        }
+
+        @Override
+        public void finishUpdate(ViewGroup container) {
+            super.finishUpdate(container);
+        }
+
+        @Override
+        public Parcelable saveState() {
+            return super.saveState();
+        }
+
+        @Override
+        public int getItemPosition (Object object) { return POSITION_NONE; }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {

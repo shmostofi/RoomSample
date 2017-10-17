@@ -12,17 +12,17 @@ public class ListItem {
 
     @PrimaryKey
     private String date;
-    private int color;
+    private int drawableColor;
     private String content;
 
-    public ListItem(int color, String date, String content) {
-        this.color = color;
+    public ListItem(int drawableColor, String date, String content) {
+        this.drawableColor = drawableColor;
         this.date = date;
         this.content = content;
     }
 
-    public int getColor() {
-        return color;
+    public int getDrawableColor() {
+        return drawableColor;
     }
 
     public String getDate() {
@@ -33,8 +33,8 @@ public class ListItem {
         return content;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setDrawableColor(int drawableColor) {
+        this.drawableColor = drawableColor;
     }
 
     public void setDate(String date) {

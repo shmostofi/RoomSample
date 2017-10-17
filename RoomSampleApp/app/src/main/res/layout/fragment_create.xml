@@ -57,7 +57,7 @@
             android:gravity="top"
             android:paddingLeft="5dp"
             android:paddingTop="5dp"
-            android:text="This is a sample note for this sample project. Main goal is to practice the MVVM design pattern and Room."
+            android:text=""
             />
     </ScrollView>
 

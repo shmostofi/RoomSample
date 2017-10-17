@@ -125,7 +125,7 @@ public class ListFragment extends LifecycleFragment {
             ListItem currentItem = dataList.get(position);
             holder.tvDate.setText(currentItem.getDate());
             holder.tvContent.setText(currentItem.getContent());
-            holder.ivLogo.setImageResource(currentItem.getColor());
+            holder.ivLogo.setImageResource(currentItem.getDrawableColor());
         }
 
         @Override
@@ -159,6 +159,12 @@ public class ListFragment extends LifecycleFragment {
 
     public void setDataList(List<ListItem> dataIn) {
         dataList = dataIn ;
+
+
+        String dataSize = String.format("%d", dataList.size());
+        Toast.makeText(getActivity(), dataSize, Toast.LENGTH_LONG).show();
+
+
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         adp = new CustomAdapter();

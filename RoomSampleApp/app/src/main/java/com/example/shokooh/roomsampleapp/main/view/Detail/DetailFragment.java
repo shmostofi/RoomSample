@@ -62,7 +62,8 @@ public class DetailFragment extends LifecycleFragment {
             public void onChanged(@Nullable ListItem listItem) {
                 tvContentDetail.setText(listItem.getContent());
                 tvDateDetail.setText(listItem.getDate());
-                // TODO: 13/10/2017 set image resource
+                tvDateDetail.setBackgroundResource(listItem.getDrawableColor());
+
             }
         });
 

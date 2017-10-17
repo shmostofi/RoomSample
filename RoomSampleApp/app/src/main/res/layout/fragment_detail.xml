@@ -7,9 +7,7 @@
     <TextView
         android:id="@+id/i_tvDateCreate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cyan"
-        android:paddingBottom="20dp"
+        android:layout_height="330dp"
         android:paddingTop="300dp"
         android:paddingLeft="5dp"
         android:text="12:53PM 18/09/2017"
