@@ -12,7 +12,7 @@ import javax.inject.Inject;
 
 public class ListItemRepository {
 
-    private final ListItemDao lid ; // our repo is hooked with one & only one dao
+    private final ListItemDao lid ;
 
     @Inject
     public ListItemRepository(ListItemDao lid_in) {
